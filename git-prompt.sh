@@ -164,7 +164,7 @@ __posh_git_echo () {
 
     local StashForegroundColor=$(echo %{'\e[0;34m'%}) # Darker blue
     local StashBackgroundColor=
-    local StashText=\\'$'
+    local StashText=\\'*'
 
     local RebaseForegroundColor=$(echo %{'\e[0m'%}) # reset
     local RebaseBackgroundColor=
@@ -364,13 +364,10 @@ __posh_git_echo () {
     gitstring+="$AfterBackgroundColor$AfterForegroundColor$AfterText"
 
     if $hasStash; then
-        gitstring+="$StashBackgroundColor$StashForegroundColor"$StashText
-        if $ShowStashCount; then
-            gitstring+=$stashCount
-        fi
+        gitstring+="$StashBackgroundColor$StashForegroundColor$StashText$stashCount"
     fi
     gitstring+="$DefaultBackgroundColor$DefaultForegroundColor"
-    echo "$gitstring"
+    echo $gitstring
 }
 
 # Updates the global variables `__POSH_BRANCH_AHEAD_BY` and `__POSH_BRANCH_BEHIND_BY`.
